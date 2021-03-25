@@ -1,5 +1,5 @@
 query LaunchesPast($limit: Int) {
-  launchesPast(limit: 10) {
+  launchesPast(limit: $limit) {
     ...RegularLaunch
   }
 }
