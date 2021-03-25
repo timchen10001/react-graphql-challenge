@@ -1450,7 +1450,7 @@ export type LaunchNextLazyQueryHookResult = ReturnType<typeof useLaunchNextLazyQ
 export type LaunchNextQueryResult = Apollo.QueryResult<LaunchNextQuery, LaunchNextQueryVariables>;
 export const LaunchesPastDocument = gql`
     query LaunchesPast($limit: Int) {
-  launchesPast(limit: 10) {
+  launchesPast(limit: $limit) {
     ...RegularLaunch
   }
 }
