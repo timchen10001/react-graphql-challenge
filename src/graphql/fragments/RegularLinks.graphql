@@ -1,0 +1,4 @@
+fragment RegularLinks on LaunchLinks {
+  article_link
+  video_link
+}

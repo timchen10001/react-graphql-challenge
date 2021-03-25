@@ -1,0 +1,16 @@
+fragment RegularLaunch on Launch {
+  id
+  mission_name
+  launch_date_local
+  details
+  launch_success
+  launch_site {
+    ...RegularLaunchSite
+  }
+  links {
+    ...RegularLinks
+  }
+  rocket {
+    ...RegularRocket
+  }
+}

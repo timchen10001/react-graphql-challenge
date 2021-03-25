@@ -1,0 +1,3 @@
+fragment RegularLaunchSite on LaunchSite {
+  site_name_long
+}
