@@ -1,7 +1,20 @@
-import './styles/App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { CustomParticle } from "./components/CustomParticle";
+import { Home } from "./pages/Home";
+import "./styles/App.scss";
 
-function App() {
-  return (<div>hi</div>);
-}
+const App = () => {
+  return (
+    <Router>
+      <CustomParticle />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;
