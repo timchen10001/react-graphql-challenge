@@ -12,7 +12,7 @@ export const usePagination = () => {
     const isScrollDown = e.deltaY > 0;
 
     // 滾輪往下 && 尚未達到限制數 -> selected++
-    // 滾輪往上 && 不為 -1 -> selected--
+    // 滾輪往上 -> 1.不為0 -> --selected 2. 為0 -> 接到尾巴
     let newSelected = selected;
     if (isScrollDown && selected < limit) {
       newSelected++;
