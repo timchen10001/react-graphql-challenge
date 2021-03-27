@@ -1,10 +1,10 @@
-import "../styles/CustomParticle.scss";
 import React from "react";
 import Particles from "react-tsparticles";
+import "../styles/CustomParticle.scss";
 
 interface CustomParticleProps {}
 
-export const CustomParticle: React.FC<CustomParticleProps> = ({}) => {
+export const CustomParticle: React.FC<CustomParticleProps> = () => {
   return (
     <Particles
       id="tsparticles"

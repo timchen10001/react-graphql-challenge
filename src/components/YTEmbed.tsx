@@ -1,10 +1,13 @@
 import React, { IframeHTMLAttributes } from "react";
 
-type YTEmbedProps = IframeHTMLAttributes<HTMLIFrameElement> & {
+interface YTEmbedProps extends IframeHTMLAttributes<HTMLIFrameElement> {
   videoId: string;
-};
+}
 
-export const YTEmbed: React.FC<YTEmbedProps> = ({ videoId, ...props }) => {
+export const YTEmbed: React.FC<YTEmbedProps> = ({
+  videoId,
+  ...props
+}) => {
   return (
     <iframe
       {...props}
