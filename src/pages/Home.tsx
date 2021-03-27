@@ -5,6 +5,7 @@ import { useLaunchesPastQuery } from "../generated/graphql";
 import { usePagination } from "../hooks/usePagination";
 import { useStateValue } from "../providers/StateProvider";
 import "../styles/Home.scss";
+import { getYTIdFromLink } from "../utils/getYTIdFromLink";
 
 interface HomeProps {}
 
@@ -42,10 +43,10 @@ export const Home: React.FC<HomeProps> = () => {
                 height: "315px",
                 maxWidth: "100vw",
                 maxHeight: "100vh",
-                borderRadius: "10px"
+                borderRadius: "10px",
               }}
-              videoId={"aVFPzTDCihQ"}
-              title={"Sentinel-6 Michael Freilich Mission2"}
+              videoId={getYTIdFromLink(target.links?.video_link)}
+              title={target.mission_name || ""}
             />
           </ul>
         </div>
