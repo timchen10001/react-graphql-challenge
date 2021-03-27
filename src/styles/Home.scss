@@ -6,6 +6,8 @@
 
 .home {
   height: 100vh;
+  min-height: 700px;
+  overflow-y: scroll;
 
   .item {
     @extend %align-center;
@@ -14,23 +16,31 @@
     height: 100vh;
     top: 0;
     right: 0;
+    opacity: 0;
+    animation: FadeIn 2s forwards;
 
     .wrapper {
       @extend %align-center;
+      flex-direction: column;
+      // flex-wrap: wrap;
 
       height: 90vh;
       width: 90vw;
-      flex-wrap: wrap;
       z-index: 0;
+      color: white;
+
+      p {
+        max-width: 400px;
+      }
 
       &:after {
         content: " ";
         position: absolute;
         width: 90%;
         height: 90%;
-        background: white;
+        // background: white;
         border-radius: 20px;
-        opacity: 0.4;
+        opacity: 0.7;
         z-index: -1;
       }
     }

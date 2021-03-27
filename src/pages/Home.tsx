@@ -1,33 +1,55 @@
-import "../styles/Home.scss";
-import React from "react";
-import { useLaunchesPastQuery } from "../generated/graphql";
+import React, { useState } from "react";
 import { Header } from "../components/Header";
 import { YTEmbed } from "../components/YTEmbed";
-import { CustomParticle } from "../components/CustomParticle";
+import { useLaunchesPastQuery } from "../generated/graphql";
+import { usePagination } from "../hooks/usePagination";
+import { useStateValue } from "../providers/StateProvider";
+import "../styles/Home.scss";
 
 interface HomeProps {}
 
-export const Home: React.FC<HomeProps> = ({}) => {
+export const Home: React.FC<HomeProps> = () => {
+  const [{ limit, selected }] = useStateValue();
+  const { handleOnWheel } = usePagination();
   const { loading, error, data } = useLaunchesPastQuery({
-    variables: { limit: 10 },
+    variables: { limit },
   });
+  if (error) return <div>{error}</div>;
 
-  let body: any = null;
-  if (error) body = <div>{error}</div>;
-  if (loading) body = <div>Loading···</div>;
-
-  console.log(data);
+  const target = selected === -1 ? null : data?.launchesPast?.[selected];
+  console.log(selected);
   return (
-    <div className="home">
+    <div className="home" onWheel={(e) => handleOnWheel(e)}>
       <Header />
-      {body}
-      <YTEmbed 
-        width={560}
-        height={315}
-        videoId={"aVFPzTDCihQ"}
-        title={"Sentinel-6 Michael Freilich Mission2"}
-      />
+      {!target ? null : (
+        <div className="item">
+          <ul className="wrapper">
+            <h2 className="title">{target?.mission_name}</h2>
+            <p>
+              <span>{target?.details}</span>
+              <br />
+              <span>{target.rocket?.rocket_name}</span>
+              <br />
+              <span>{target.rocket?.rocket_type}</span>
+              <br />
+              <span>{target.launch_date_local}</span>
+              <br />
+              <span>{target.links?.article_link}</span>
+            </p>
+            <YTEmbed
+              style={{
+                width: "560px",
+                height: "315px",
+                maxWidth: "100vw",
+                maxHeight: "100vh",
+                borderRadius: "10px"
+              }}
+              videoId={"aVFPzTDCihQ"}
+              title={"Sentinel-6 Michael Freilich Mission2"}
+            />
+          </ul>
+        </div>
+      )}
     </div>
-    // <div>hi</div>
   );
 };

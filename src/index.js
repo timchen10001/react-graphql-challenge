@@ -5,11 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "./providers/apolloClient";
+import { StatePorvider } from "./providers/StateProvider";
+import reducer, { initialState } from "./reducers/reducer";
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={apolloClient}>
-      <App />
+      <StatePorvider initialState={initialState} reducer={reducer}>
+        <App />
+      </StatePorvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
