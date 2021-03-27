@@ -14,11 +14,13 @@ export const usePagination = () => {
     // 滾輪往下 && 尚未達到限制數 -> selected++
     // 滾輪往上 && 不為 -1 -> selected--
     let newSelected = selected;
-    if (isScrollDown && selected < limit) newSelected = selected + 1;
-    else if (!isScrollDown && selected > -1) newSelected = selected - 1;
+    if (isScrollDown && selected < limit) newSelected++;
+    else if (!isScrollDown && selected > -1) newSelected--;
+
+    if (newSelected === selected) return;
 
     // debugging
-    console.log({ newSelected });
+    // console.log({ newSelected });
 
     // dispatching new state ...
     dispatch({ type: "SET_DISPATCHING", dispatching: true });
