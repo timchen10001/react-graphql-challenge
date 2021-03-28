@@ -8,10 +8,10 @@ export const Header: React.FC<HeaderProps> = () => {
   const [, dispatch] = useStateValue();
   useEffect(() => {
     setTimeout(() => {
-      const a = document.querySelector(".header");
-      a?.classList.add("fadeout");
+      const headerClassSet = document.querySelector(".header")?.classList;
+      headerClassSet?.add("fadeout");
       setTimeout(() => {
-        a?.classList.add("hide");
+        headerClassSet?.add("hide");
         dispatch({ type: "SET_SELECTED", selected: 0 });
       }, 1500);
     }, 1500);

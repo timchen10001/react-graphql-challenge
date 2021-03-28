@@ -4,10 +4,20 @@
   justify-content: center;
 }
 
+%align-center-column {
+  @extend %align-center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+%hide-scroll-bar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .home {
   height: 100vh;
   min-height: 700px;
-  overflow-y: scroll;
 
   .item {
     @extend %align-center;
@@ -20,28 +30,20 @@
     animation: FadeIn 2s forwards;
 
     .wrapper {
-      @extend %align-center;
-      flex-direction: column;
-      // flex-wrap: wrap;
-
-      height: 90vh;
+      @extend %align-center-column;
       width: 90vw;
-      z-index: 0;
+      height: 90vh;
       color: white;
+      overflow-y: scroll;
+      z-index: -1;
 
-      p {
-        max-width: 400px;
+      @extend %hide-scroll-bar;
+      ::-webkit-scrollbar {
+        display: none;
       }
-
-      &:after {
-        content: " ";
-        position: absolute;
-        width: 90%;
-        height: 90%;
-        // background: white;
-        border-radius: 20px;
-        opacity: 0.7;
-        z-index: -1;
+      p {
+        width: 100%;
+        max-width: 560px;
       }
     }
   }

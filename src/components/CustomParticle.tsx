@@ -10,31 +10,6 @@ export const CustomParticle: React.FC<CustomParticleProps> = () => {
       id="tsparticles"
       options={{
         fpsLimit: 60,
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onclick: { enable: true, mode: "repulse" },
-            onhover: {
-              enable: true,
-              mode: "bubble",
-              parallax: { enable: false, force: 2, smooth: 10 },
-            },
-            resize: true,
-          },
-          modes: {
-            bubble: {
-              distance: 200,
-              duration: 2,
-              opacity: 0,
-              size: 0,
-              speed: 3,
-            },
-            grab: { distance: 400, line_linked: { opacity: 1 } },
-            push: { particles_nb: 4 },
-            remove: { particles_nb: 2 },
-            repulse: { distance: 400, duration: 0.4 },
-          },
-        },
         particles: {
           color: { value: "#ffffff" },
           line_linked: {
