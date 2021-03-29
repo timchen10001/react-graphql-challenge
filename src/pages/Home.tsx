@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Header } from "../components/Header";
 import { YTEmbed } from "../components/YTEmbed";
-import { useLaunchesPastQuery } from "../generated/graphql";
+import { Launch, useLaunchesPastQuery } from "../generated/graphql";
 import { usePagination } from "../hooks/usePagination";
 import useRWD from "../hooks/useRWD";
+import { useTarget } from "../hooks/useTarget";
 import { useStateValue } from "../providers/StateProvider";
 import "../styles/Home.scss";
 import { difference } from "../utils/difference";
@@ -12,16 +13,12 @@ import { getYTIdFromLink } from "../utils/getYTIdFromLink";
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
-  const [{ limit, selected }] = useStateValue();
-  const { handleOnWheel } = usePagination();
+  const { handleOnWheel, handleTouchMove } = usePagination();
+  const { target, error } = useTarget();
   const device = useRWD();
-  const { loading, error, data } = useLaunchesPastQuery({
-    variables: { limit },
-  });
+  const isMobile = device === "mobile";
   if (error) return <div>{error}</div>;
-
-  const target = selected === -1 ? null : data?.launchesPast?.[selected];
-
+  var lastClientY = 0;
   return (
     <div
       className="home"
@@ -29,112 +26,29 @@ export const Home: React.FC<HomeProps> = () => {
         if (device !== "PC") return;
         handleOnWheel(e);
       }}
+      onTouchStart={e => {
+        if (device !== "mobile") return;
+        lastClientY = e.changedTouches[0].clientY;
+      }}
+      onTouchMove={(e) => {
+        if (device !== "mobile") return;
+        const clientY = e.changedTouches[0].clientY;
+        const isScollDownByTouchMove = clientY - lastClientY < 0; // scroll down
+        const diff = difference(clientY, lastClientY)
+        const withEnoughMoves = diff > 30;
+        console.log({ isScollDownByTouchMove, diff })
+        handleTouchMove(withEnoughMoves ? isScollDownByTouchMove : undefined);
+      }}
     >
       <Header />
       {!target ? null : (
-        <div id={`item-${selected}`} className="item">
-          <ul className="wrapper">
+        <div className="item">
+          <ul
+            className="wrapper"
+            style={{ width: isMobile ? "100vw" : "90vw" }}
+          >
             <h2 className="title">{target?.mission_name}</h2>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
-              <span>{target?.details}</span>
-              <br />
-              <span>{target.rocket?.rocket_name}</span>
-              <br />
-              <span>{target.rocket?.rocket_type}</span>
-              <br />
-              <span>{target.launch_date_local}</span>
-              <br />
-              <span>{target.links?.article_link}</span>
-            </p>
-            <p>
+            <p style={{ padding: isMobile ? "0 5vw" : "0" }}>
               <span>{target?.details}</span>
               <br />
               <span>{target.rocket?.rocket_name}</span>
@@ -149,9 +63,9 @@ export const Home: React.FC<HomeProps> = () => {
               <YTEmbed
                 className="embed__video"
                 style={{
-                  width: device === "mobile" ? "100%" : "560px",
-                  minHeight: "350px",
-                  borderRadius: "12px",
+                  width: isMobile ? "100%" : "560px",
+                  minHeight: isMobile ? "350px" : "380px",
+                  borderRadius: isMobile ? "0" : "12px",
                 }}
                 videoId={getYTIdFromLink(target.links?.video_link)}
                 title={target.mission_name || ""}

@@ -45,6 +45,22 @@
         width: 100%;
         max-width: 560px;
       }
+
+
+      // .hide {
+      //   display: none;
+      // }
     }
+  }
+}
+
+@keyframes Pagination {
+  from {
+    opacity: 1;
+    
+  }
+  to {
+    opacity: 0;
+    height: 0;
   }
 }
