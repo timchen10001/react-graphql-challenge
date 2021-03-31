@@ -20,7 +20,7 @@ export const LaunchSpan: React.FC<LaunchSpanProps> = ({
     <>
       {beforeBreak ? <br /> : null}
       {name}：{nameBreak ? <br /> : null}
-      <span {...props} className={className}>
+      <span style={{ fontSize: "18px", lineHeight: "5px" }} {...props} className={className}>
         {content}
       </span>
       <br />

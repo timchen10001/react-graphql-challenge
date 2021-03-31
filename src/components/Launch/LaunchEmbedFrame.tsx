@@ -20,6 +20,7 @@ export const LaunchEmbedFrame: React.FC<LaunchEmbedFrameProps> = ({
     <>
       <br />
       {name}：{nameBreak ? <br /> : null}
+      <br/>
       <YTEmbed
         {...props}
         className="embed__video"
