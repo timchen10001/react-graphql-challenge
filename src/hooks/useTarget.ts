@@ -1,9 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import {
-  Launch,
-  useLaunchesPastQuery,
-  useLaunchNextQuery,
-} from "../generated/graphql";
+import { useEffect, useRef, useState } from "react";
+import { Launch } from "../generated/graphql";
 import { useStateValue } from "../providers/StateProvider";
 import { useLaunchQuery } from "./useLaunchQuery";
 

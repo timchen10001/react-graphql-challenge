@@ -1,6 +1,6 @@
-import "../styles/Header.scss";
 import React, { useEffect } from "react";
 import { useStateValue } from "../providers/StateProvider";
+import "../styles/Header.scss";
 
 interface HeaderProps {}
 
