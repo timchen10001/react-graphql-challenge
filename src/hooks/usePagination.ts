@@ -8,19 +8,31 @@ export const usePagination = () => {
 
   const isOnBottom = (): boolean => {
     const wrapper = document.querySelector(".wrapper");
-    const wrapperViewHeight = document.body.clientHeight * 0.9;
+    const wrapperViewHeight = document.body.clientHeight;
     const scrollTop = wrapper?.scrollTop;
     const scrollHeight = wrapper?.scrollHeight;
     if (typeof scrollTop !== "number" || typeof scrollHeight !== "number")
       return false;
-    return difference(wrapperViewHeight + scrollTop, scrollHeight) < 1;
+    return (
+      difference(wrapperViewHeight + scrollTop, scrollHeight) <
+      1 + wrapperViewHeight * 0.1
+    );
   };
 
   const isOnTop = (): boolean => {
     return document.querySelector(".wrapper")?.scrollTop === 0;
   };
 
-  const handleOnWheel = async (e: React.WheelEvent<HTMLDivElement>) => {
+  const setState = async (newSelected: number) => {
+    dispatch({ type: "SET_DISPATCHING", dispatching: true });
+    dispatch({ type: "SET_SELECTED", selected: -1 });
+    await sleep(1000);
+    dispatch({ type: "SET_SELECTED", selected: newSelected % limit });
+    await sleep(2000);
+    dispatch({ type: "SET_DISPATCHING", dispatching: false });
+  };
+
+  const handleOnWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     // 如果在 dispatching || 滾動差小於 50 -> 不做任何改變
     if (dispatching || difference(e.deltaY, 0) < 40) return;
 
@@ -37,23 +49,12 @@ export const usePagination = () => {
       newSelected = selected ? --newSelected : limit - 1;
     }
 
-    // debugging
-    // console.log({ newSelected });
-
     // dispatching new state ...
-    dispatch({ type: "SET_DISPATCHING", dispatching: true });
-    dispatch({ type: "SET_SELECTED", selected: -1 });
-    await sleep(1000);
-    dispatch({ type: "SET_SELECTED", selected: newSelected % limit });
-    await sleep(2000);
-    dispatch({ type: "SET_DISPATCHING", dispatching: false });
+    setState(newSelected);
   };
 
-  async function handleTouchMove(isScollDownByTouchMove: boolean | undefined) {
-    if (typeof isScollDownByTouchMove === "undefined" || dispatching) return;
-    // const clientY = e.changedTouches[0].clientY;
-    // const isScollDownByTouchMove = clientY - lastClientY < 0; // scroll down
-    // lastClientY = clientY;
+  const handleTouchMove = (isScollDownByTouchMove: boolean | undefined) => {
+    if (isScollDownByTouchMove === undefined || dispatching) return;
 
     let newSelected = selected;
     if (isScollDownByTouchMove && selected < limit) {
@@ -64,17 +65,9 @@ export const usePagination = () => {
       newSelected = selected ? --newSelected : limit - 1;
     }
 
-    // debugging
-    // console.log({ newSelected });
-
     // dispatching new state ...
-    dispatch({ type: "SET_DISPATCHING", dispatching: true });
-    dispatch({ type: "SET_SELECTED", selected: -1 });
-    await sleep(1000);
-    dispatch({ type: "SET_SELECTED", selected: newSelected % limit });
-    await sleep(2000);
-    dispatch({ type: "SET_DISPATCHING", dispatching: false });
-  }
+    setState(newSelected);
+  };
 
   return { handleOnWheel, handleTouchMove };
 };

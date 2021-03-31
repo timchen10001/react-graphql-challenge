@@ -1,9 +1,10 @@
+import { __launches_past_limit__ } from "../constants";
 import { IAction, IStateValue } from "../types";
 
 export const initialState: IStateValue = {
   dispatching: false,
   selected: -1,
-  limit: 10,
+  limit: __launches_past_limit__+1,
 };
 
 export enum actionType {
@@ -27,7 +28,7 @@ const reducer = (state: IStateValue, action: IAction): IStateValue => {
     case actionType.SET_LIMIT:
       return {
         ...state,
-        selected: action.limit,
+        limit: action.limit
       };
     default:
       return state;

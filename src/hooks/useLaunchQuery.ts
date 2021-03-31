@@ -1,10 +1,10 @@
 import { ApolloError } from "@apollo/client";
+import { __launches_past_limit__ } from "../constants";
 import {
   Launch,
   useLaunchesPastQuery,
   useLaunchNextQuery,
 } from "../generated/graphql";
-import { useStateValue } from "../providers/StateProvider";
 
 interface ILaunchQuery {
   data: (Launch | null | undefined)[];
@@ -12,15 +12,16 @@ interface ILaunchQuery {
 }
 
 export const useLaunchQuery = (): ILaunchQuery => {
-  const [{ limit }, dispatch] = useStateValue();
   const { data: nextQuery, error: nextError } = useLaunchNextQuery();
   const { data: pastQuery, error: pastError } = useLaunchesPastQuery({
-    variables: { limit },
+    variables: { limit: __launches_past_limit__ },
   });
   if (pastQuery?.launchesPast && Array.isArray(pastQuery.launchesPast)) {
-    const launchQuery = [...pastQuery.launchesPast, nextQuery?.launchNext];
-    dispatch({ type: "SET_LIMT", limit: launchQuery.length });
-    return { data: launchQuery, error: pastError || nextError };
+    const launchesPast: (Launch | null | undefined)[] = [];
+    pastQuery.launchesPast.forEach((l) => launchesPast.push(l));
+    launchesPast.reverse();
+    launchesPast.push(nextQuery?.launchNext);
+    return { data: launchesPast, error: pastError || nextError };
   }
   return { data: [null], error: pastError || nextError };
 };

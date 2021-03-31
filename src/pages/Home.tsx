@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "../components/Header";
-import { LaunchMission } from "../components/LaunchMission";
+import { LaunchMission } from "../components/Launch/LaunchMission";
 import { usePagination } from "../hooks/usePagination";
 import useRWD from "../hooks/useRWD";
 import { useTarget } from "../hooks/useTarget";
@@ -13,7 +13,6 @@ export const Home: React.FC<HomeProps> = () => {
   const { handleOnWheel, handleTouchMove } = usePagination();
   const { target, error } = useTarget();
   const device = useRWD();
-  const isMobile = device === "mobile";
   var lastClientY = 0;
 
   return error ? (
@@ -40,7 +39,7 @@ export const Home: React.FC<HomeProps> = () => {
       {!target ? null : (
         <div className="item">
           <ul className="wrapper">
-            <LaunchMission target={target} isMobile={isMobile} />
+            <LaunchMission target={target} variant={device} />
           </ul>
         </div>
       )}
