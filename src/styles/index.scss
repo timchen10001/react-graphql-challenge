@@ -1,3 +1,18 @@
+%background_position_setting {
+  background-size: cover;
+  background-position: center center;
+}
+
+:root {
+  --galaxy-background: url("../assets//galaxy-background-image.jpeg");
+  --spaceX-logo: url('../assets//spacex-logo-black-and-white.png');
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  --animation-fade-out: FadeOut;
+  --animation-fade-in: FadeIn;
+}
+
 *,
 *::before,
 *::after {
@@ -7,21 +22,14 @@
 }
 
 body {
-  margin: 0;
+  @extend %background_position_setting;
   overflow: hidden;
-  background: #000;
+  background-image: var(--galaxy-background);
   z-index: -1;
   max-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 @keyframes FadeIn {

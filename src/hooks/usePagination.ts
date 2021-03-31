@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useStateValue } from "../providers/StateProvider";
 import { difference } from "../utils/difference";
 import { sleep } from "../utils/sleep";
@@ -22,7 +22,7 @@ export const usePagination = () => {
 
   const handleOnWheel = async (e: React.WheelEvent<HTMLDivElement>) => {
     // 如果在 dispatching || 滾動差小於 50 -> 不做任何改變
-    if (dispatching || difference(e.deltaY, 0) < 50) return;
+    if (dispatching || difference(e.deltaY, 0) < 40) return;
 
     const isScrollDown = e.deltaY > 0;
 
