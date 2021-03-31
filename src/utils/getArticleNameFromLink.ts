@@ -1,5 +1,5 @@
-export const getArticleNameFromLink = (articleLink: string | undefined) => {
-  if (!articleLink?.includes("/")) {
+export const getArticleNameFromLink = (articleLink: string | undefined | null) => {
+  if (!articleLink || !articleLink?.includes("/")) {
     return "";
   }
   const splitedLink = articleLink.split("/");

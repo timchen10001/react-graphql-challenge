@@ -1,13 +1,16 @@
 .title {
-//   line-height: 8rem;
-
   padding: 4rem 15px;
+  text-align: center;
 }
 
 .text {
   line-height: 3rem;
-  font-size: larger;
+  font-size: x-large;
 
   width: 100%;
-  max-width: 560px;
+  max-width: 800px;
+
+  .article__link {
+    color: white;
+  }
 }
