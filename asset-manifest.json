@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/react-graphql-challenge/static/css/main.76a689b2.chunk.css",
-    "main.js": "/react-graphql-challenge/static/js/main.fb3032f0.chunk.js",
-    "main.js.map": "/react-graphql-challenge/static/js/main.fb3032f0.chunk.js.map",
-    "runtime-main.js": "/react-graphql-challenge/static/js/runtime-main.88fb1808.js",
-    "runtime-main.js.map": "/react-graphql-challenge/static/js/runtime-main.88fb1808.js.map",
-    "static/js/2.c5e0a2ee.chunk.js": "/react-graphql-challenge/static/js/2.c5e0a2ee.chunk.js",
-    "static/js/2.c5e0a2ee.chunk.js.map": "/react-graphql-challenge/static/js/2.c5e0a2ee.chunk.js.map",
-    "static/js/3.2c25cb81.chunk.js": "/react-graphql-challenge/static/js/3.2c25cb81.chunk.js",
-    "static/js/3.2c25cb81.chunk.js.map": "/react-graphql-challenge/static/js/3.2c25cb81.chunk.js.map",
+    "main.css": "/react-graphql-challenge/static/css/main.d2a1be69.chunk.css",
+    "main.js": "/react-graphql-challenge/static/js/main.c4e1f3ef.chunk.js",
+    "main.js.map": "/react-graphql-challenge/static/js/main.c4e1f3ef.chunk.js.map",
+    "runtime-main.js": "/react-graphql-challenge/static/js/runtime-main.8ba5d722.js",
+    "runtime-main.js.map": "/react-graphql-challenge/static/js/runtime-main.8ba5d722.js.map",
+    "static/js/2.e2fdd4ab.chunk.js": "/react-graphql-challenge/static/js/2.e2fdd4ab.chunk.js",
+    "static/js/2.e2fdd4ab.chunk.js.map": "/react-graphql-challenge/static/js/2.e2fdd4ab.chunk.js.map",
+    "static/js/3.0ea9f60d.chunk.js": "/react-graphql-challenge/static/js/3.0ea9f60d.chunk.js",
+    "static/js/3.0ea9f60d.chunk.js.map": "/react-graphql-challenge/static/js/3.0ea9f60d.chunk.js.map",
     "index.html": "/react-graphql-challenge/index.html",
-    "static/css/main.76a689b2.chunk.css.map": "/react-graphql-challenge/static/css/main.76a689b2.chunk.css.map",
-    "static/js/2.c5e0a2ee.chunk.js.LICENSE.txt": "/react-graphql-challenge/static/js/2.c5e0a2ee.chunk.js.LICENSE.txt",
+    "static/css/main.d2a1be69.chunk.css.map": "/react-graphql-challenge/static/css/main.d2a1be69.chunk.css.map",
+    "static/js/2.e2fdd4ab.chunk.js.LICENSE.txt": "/react-graphql-challenge/static/js/2.e2fdd4ab.chunk.js.LICENSE.txt",
     "static/media/Home.scss": "/react-graphql-challenge/static/media/spacex-logo-black-and-white.e548eb03.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.88fb1808.js",
-    "static/js/2.c5e0a2ee.chunk.js",
-    "static/css/main.76a689b2.chunk.css",
-    "static/js/main.fb3032f0.chunk.js"
+    "static/js/runtime-main.8ba5d722.js",
+    "static/js/2.e2fdd4ab.chunk.js",
+    "static/css/main.d2a1be69.chunk.css",
+    "static/js/main.c4e1f3ef.chunk.js"
   ]
 }
