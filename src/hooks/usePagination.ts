@@ -8,15 +8,13 @@ export const usePagination = () => {
 
   const isOnBottom = (): boolean => {
     const wrapper = document.querySelector(".wrapper");
-    const wrapperViewHeight = document.body.clientHeight;
+    const wrapperViewHeight =
+      document.body.clientHeight * (document.body.clientWidth <= 576 ? 1 : 0.9);
     const scrollTop = wrapper?.scrollTop;
     const scrollHeight = wrapper?.scrollHeight;
     if (typeof scrollTop !== "number" || typeof scrollHeight !== "number")
       return false;
-    return (
-      difference(wrapperViewHeight + scrollTop, scrollHeight) <
-      1 + wrapperViewHeight * 0.1
-    );
+    return difference(wrapperViewHeight + scrollTop, scrollHeight) < 2;
   };
 
   const isOnTop = (): boolean => {

@@ -6,7 +6,7 @@ const useRWD = (): RWDVariant => {
   const [device, setDevice] = useState("mobile" as const);
 
   const handleRWD = () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth >= 1100) {
       setDevice("PC" as any);
     } else if (window.innerWidth <= 768 && window.innerWidth > 576) {
       setDevice("tablet" as any);
