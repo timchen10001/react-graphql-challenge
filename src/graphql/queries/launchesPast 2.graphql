@@ -1,5 +1,0 @@
-query LaunchesPast($limit: Int) {
-  launchesPast(limit: $limit) {
-    ...RegularLaunch
-  }
-}

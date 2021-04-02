@@ -1,4 +1,0 @@
-fragment RegularRocket on LaunchRocket {
-  rocket_name
-  rocket_type
-}
